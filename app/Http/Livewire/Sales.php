@@ -78,6 +78,7 @@ class Sales extends Component
             if($this->maxstock->stock <= 0){
                 session()->flash('meseg', 'Todos los productos estan agotados');
             }
+           // dd($this->maxstock);
         }else{
             session()->flash('meseg', 'No hay productos registrados');
         }
@@ -86,18 +87,32 @@ class Sales extends Component
     public function maxSale()
     {
         $this->maxsale = DB::table('sales')        
-            ->select(DB::raw('product, count(product) as total'))
-            ->groupBy('product')
-            ->orderBy('product', 'desc')
-            ->first();
-        
+        ->select('product', DB::raw('SUM(cant) as total'))
+        ->groupBy('product')
+        ->orderBy('total', 'desc')
+        ->first();
+
+   
         if($this->maxsale != null){
             $this->maxsale = Product::where('id', $this->maxsale->product)->get();
+          //  dd( $this->maxsale );
         }else{
             session()->flash('mseg', 'No se han realizado ventas.');
         }
-
        
+       
+        // $this->maxsale = DB::table('sales')        
+        //     ->join('products', 'products.id', '=', 'sales.product')            
+        //     ->select('products.name', DB::raw('SUM(cant)'))
+        //     ->groupBy('product','name')
+        //     ->orderBy('product', 'desc')
+        //     ->limit(1)
+        //     ->get();
+
+
+        // if($this->maxsale == null){
+        //     session()->flash('mseg', 'No se han realizado ventas.');
+        // }       
     }
 
     public function cancel()

@@ -68,7 +68,7 @@
 						@endif
 							@if (session()->has('mseg'))								
 								<div wire:poll.4s class="btn btn-sm btn-danger ml-2" style="margin-top:0px; margin-bottom:0px;"> {{ session('mseg') }} </div>
-							@endif	
+							@endif		
 					</div>
 				</div>
 			</div>
