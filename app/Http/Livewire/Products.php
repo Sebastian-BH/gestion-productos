@@ -67,7 +67,7 @@ class Products extends Component
         
         $this->resetInput();
 		$this->emit('closeModal');
-		session()->flash('message', 'Product Successfully created.');
+		session()->flash('message', 'Producto creado exitosamente.');
     }
 
     public function edit($id)
@@ -109,7 +109,7 @@ class Products extends Component
 
             $this->resetInput();
             $this->updateMode = false;
-			session()->flash('message', 'Product Successfully updated.');
+			session()->flash('message', 'Producto actualizado exitosamente.');
         }
     }
 

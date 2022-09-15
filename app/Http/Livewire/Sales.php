@@ -16,7 +16,7 @@ class Sales extends Component
     public $selected_id, $keyWord, $product, $cant;
     public $selectedProduct=null;
     public $updateMode = false;
-    public $producto=null;
+    public $producto=null, $maxstock=null, $maxsale=null;
     public $aux=0;
 
     public function render()
@@ -41,7 +41,7 @@ class Sales extends Component
 		'cant' => 'required',
         ]);
         
-        if ($this->producto[0]->stock >= $this->cant){
+        if ($this->producto[0]->stock >= $this->cant && $this->cant > 0){
             $this->aux=$this->producto[0]->stock-$this->cant;
             Sale::create([ 
                 'product' => $id,
@@ -51,14 +51,11 @@ class Sales extends Component
             $this->resetInput();
             $this->emit('closeModal');
             $this->edit($id,$this->aux);
-            session()->flash('message', 'Sale Successfully created.');
+            session()->flash('message', 'Venta exitosa.');
         }else{
-            //dump($this->cant);
-
             $this->resetInput();
             $this->emit('closeModal');
-            session()->flash('message', 'lo sentimos.');
-            
+            session()->flash('msg', 'Lo sentimos cantidad insuficiente.');
        }
         
     }
@@ -73,16 +70,30 @@ class Sales extends Component
         }
     }
 
+    public function maxStock()
+    {
+        $this->maxstock = Product::orderBy('stock', 'desc')->first();
+        if($this->maxstock->stock <= 0){
+            session()->flash('meseg', 'Todos los productos estan agotados');
+        }
+    }
 
+    public function maxSale()
+    {
+        $this->maxsale = DB::table('sales')        
+            ->select(DB::raw('product, count(product) as total'))
+            ->groupBy('product')
+            ->orderBy('product', 'desc')
+            ->first();
+        
+        if($this->maxsale != null){
+            $this->maxsale = Product::where('id', $this->maxsale->product)->get();
+        }else{
+            session()->flash('mseg', 'No se han realizado ventas.');
+        }
 
-
-
-
-
-
-
-
-
+       
+    }
 
     public function cancel()
     {
@@ -95,9 +106,6 @@ class Sales extends Component
 		$this->product = null;
 		$this->cant = null;
     }
-
-    
-
    
 
     public function update()

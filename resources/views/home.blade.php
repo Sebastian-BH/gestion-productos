@@ -3,15 +3,15 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>CAFETERIA</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>GESTIÓN DE PRODUCTOS.</p>
 @stop
 
 @section('footer')
-    <p>footer.</p>
+    <p></p>
 @stop
 
 @section('css')
