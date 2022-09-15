@@ -10,7 +10,7 @@ return [
     | For detailed instructions you can look the title section here:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     */
-    'title' => 'RAFFLES',
+    'title' => 'Cafeteria',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -39,7 +39,7 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
-    'logo' => '<b>Raffles</b>LTE',
+    'logo' => '<b>Cafeteria</b>LTE',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -210,77 +210,21 @@ return [
     |
     */
     'menu' => [
-        // Navbar items:
-        // [
-        //     'type'         => 'navbar-search',
-        //     'text'         => 'search',
-        //     'topnav_right' => true,
-        // ],
-        // [
-        //     'type'         => 'fullscreen-widget',
-        //     'topnav_right' => true,
-        // ],
-
-        // Sidebar items:
-        // [
-        //     'type' => 'sidebar-menu-search',
-        //     'text' => 'search',
-        // ],  
+         
         [
-            'text'        => 'Compañias',
-            'url'         => 'companies',
+            'text'        => 'Productos',
+            'url'         => 'products',
             'icon'        => 'fas fa-fw fa-building',
-            'can'         => ' ',
+            
         ],      
         [
-            'text'        => 'Usuarios',
-            'url'         => 'users',
-            'icon'        => 'fas fa-fw fa-user',
-            'can'         => ' ',
-        ],
-        [
-            'text'        => 'Cajas',
-            'url'         => 'boxes',
-            'icon'        => 'fas fa-wrench',
-            'can'         => ' ',
-        ],
-        [
-            'text'        => 'Ventas',
+            'text'        => 'Vender',
             'url'         => 'sales',
-            'icon'        => 'fas fa-desktop',
-            'can'         => ' ',
+            'icon'        => 'fas fa-fw fa-user',
+            
         ],
-        [
-            'text'        => 'Ingresos',
-            'url'         => 'incomes',
-            'icon'        => 'fas fa-code',
-            'can'         => ' ',
-        ],
-        [
-            'text'        => 'Egresos',
-            'url'         => 'expenses',
-            'icon'        => 'fas fa-file-invoice-dollar',
-            'can'         => ' ',
-        ],
-        [
-            'text'    => 'Reportes',
-            'icon'    => 'fas fa-fw fa-share',
-            'can'         => ' ',
-            'submenu' => [
-                [
-                    'text' => 'Reporte Uno',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'Reporte Dos',
-                    'url'     => '#',
-                ],
-                [
-                    'text' => 'Reporte Tres',
-                    'url'  => '#',
-                ],
-            ],
-        ],
+        
+               
     ],
 
     /*

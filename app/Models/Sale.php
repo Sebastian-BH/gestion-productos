@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model
@@ -11,19 +12,14 @@ class Sale extends Model
 
     protected $table = 'sales';
 
-    protected $fillable = [
-        'user_id',
-        'sorteo_id',
-        'phone',
-        'total',
-        'status'
-    ];
-
-    // The attributes that should be casted to a Carbon instance.
-    protected $dates = [
-        'created_at', 
-        'updated_at', 
-        'deleted_at'
-    ];
+    protected $fillable = ['product','cant'];
 	
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function product()
+    {
+        return $this->hasOne('App\Models\Product', 'id', 'product');
+    }
+    
 }

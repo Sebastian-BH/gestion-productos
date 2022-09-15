@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createDataModalLabel">Create New Sale</h5>
+                <h5 class="modal-title" id="createDataModalLabel">Vender Producto</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true close-btn">×</span>
                 </button>
@@ -11,24 +11,12 @@
            <div class="modal-body">
 				<form>
             <div class="form-group">
-                <label for="user_id"></label>
-                <input wire:model="user_id" type="text" class="form-control" id="user_id" placeholder="User Id">@error('user_id') <span class="error text-danger">{{ $message }}</span> @enderror
+                <label for="product"></label>
+                <input wire:model="product" type="text" class="form-control" id="product" placeholder="Product">@error('product') <span class="error text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="form-group">
-                <label for="sorteo_id"></label>
-                <input wire:model="sorteo_id" type="text" class="form-control" id="sorteo_id" placeholder="Sorteo Id">@error('sorteo_id') <span class="error text-danger">{{ $message }}</span> @enderror
-            </div>
-            <div class="form-group">
-                <label for="phone"></label>
-                <input wire:model="phone" type="text" class="form-control" id="phone" placeholder="Phone">@error('phone') <span class="error text-danger">{{ $message }}</span> @enderror
-            </div>
-            <div class="form-group">
-                <label for="total"></label>
-                <input wire:model="total" type="text" class="form-control" id="total" placeholder="Total">@error('total') <span class="error text-danger">{{ $message }}</span> @enderror
-            </div>
-            <div class="form-group">
-                <label for="status"></label>
-                <input wire:model="status" type="text" class="form-control" id="status" placeholder="Status">@error('status') <span class="error text-danger">{{ $message }}</span> @enderror
+                <label for="cant"></label>
+                <input wire:model="cant" type="text" class="form-control" id="cant" placeholder="Cant">@error('cant') <span class="error text-danger">{{ $message }}</span> @enderror
             </div>
 
                 </form>

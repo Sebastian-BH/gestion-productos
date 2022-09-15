@@ -2,32 +2,88 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use Livewire\WithPagination;
 use App\Models\Sale;
+use Livewire\Component;
+use App\Models\Product;
+use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 
 class Sales extends Component
 {
     use WithPagination;
 
 	protected $paginationTheme = 'bootstrap';
-    public $selected_id, $keyWord, $user_id, $sorteo_id, $phone, $total, $status;
+    public $selected_id, $keyWord, $product, $cant;
+    public $selectedProduct=null;
     public $updateMode = false;
+    public $producto=null;
+    public $aux=0;
 
     public function render()
     {
-		$keyWord = '%'.$this->keyWord .'%';
+		
         return view('livewire.sales.view', [
-            'sales' => Sale::latest()
-						->orWhere('user_id', 'LIKE', $keyWord)
-						->orWhere('sorteo_id', 'LIKE', $keyWord)
-						->orWhere('phone', 'LIKE', $keyWord)
-						->orWhere('total', 'LIKE', $keyWord)
-						->orWhere('status', 'LIKE', $keyWord)
-						->paginate(10),
+            'products' => Product::all()
         ]);
     }
 	
+    
+    public function updatedselectedProduct($producto_id)
+    {
+		$this->producto = Product::where('id', $producto_id)->get();
+    
+    }
+
+
+    public function store($id)
+    {
+        $this->validate([		
+		'cant' => 'required',
+        ]);
+        
+        if ($this->producto[0]->stock >= $this->cant){
+            $this->aux=$this->producto[0]->stock-$this->cant;
+            Sale::create([ 
+                'product' => $id,
+                'cant' => $this-> cant
+            ]);            
+
+            $this->resetInput();
+            $this->emit('closeModal');
+            $this->edit($id,$this->aux);
+            session()->flash('message', 'Sale Successfully created.');
+        }else{
+            //dump($this->cant);
+
+            $this->resetInput();
+            $this->emit('closeModal');
+            session()->flash('message', 'lo sentimos.');
+            
+       }
+        
+    }
+
+    public function edit($id, $aux)
+    {
+        $record = Product::findOrFail($id);
+
+        if($record) {
+            $record->stock = $aux;
+            $record->save();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public function cancel()
     {
         $this->resetInput();
@@ -36,68 +92,26 @@ class Sales extends Component
 	
     private function resetInput()
     {		
-		$this->user_id = null;
-		$this->sorteo_id = null;
-		$this->phone = null;
-		$this->total = null;
-		$this->status = null;
+		$this->product = null;
+		$this->cant = null;
     }
 
-    public function store()
-    {
-        $this->validate([
-		'user_id' => 'required',
-		'sorteo_id' => 'required',
-		'phone' => 'required',
-		'total' => 'required',
-		'status' => 'required',
-        ]);
+    
 
-        Sale::create([ 
-			'user_id' => $this-> user_id,
-			'sorteo_id' => $this-> sorteo_id,
-			'phone' => $this-> phone,
-			'total' => $this-> total,
-			'status' => $this-> status
-        ]);
-        
-        $this->resetInput();
-		$this->emit('closeModal');
-		session()->flash('message', 'Sale Successfully created.');
-    }
-
-    public function edit($id)
-    {
-        $record = Sale::findOrFail($id);
-
-        $this->selected_id = $id; 
-		$this->user_id = $record-> user_id;
-		$this->sorteo_id = $record-> sorteo_id;
-		$this->phone = $record-> phone;
-		$this->total = $record-> total;
-		$this->status = $record-> status;
-		
-        $this->updateMode = true;
-    }
+   
 
     public function update()
     {
         $this->validate([
-		'user_id' => 'required',
-		'sorteo_id' => 'required',
-		'phone' => 'required',
-		'total' => 'required',
-		'status' => 'required',
+		'product' => 'required',
+		'cant' => 'required',
         ]);
 
         if ($this->selected_id) {
 			$record = Sale::find($this->selected_id);
             $record->update([ 
-			'user_id' => $this-> user_id,
-			'sorteo_id' => $this-> sorteo_id,
-			'phone' => $this-> phone,
-			'total' => $this-> total,
-			'status' => $this-> status
+			'product' => $this-> product,
+			'cant' => $this-> cant
             ]);
 
             $this->resetInput();

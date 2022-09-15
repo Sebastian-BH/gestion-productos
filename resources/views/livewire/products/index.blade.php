@@ -1,14 +1,14 @@
 @extends('adminlte::page')
 
-@section('title', 'companys')
+@section('title', 'products')
 
 @section('content_header')
-    <h1>Compañias</h1>
+    <h1>Productos</h1>
 @stop
 
 @section('content')
 	
-    @livewire('companys')
+@livewire('products')
    
 @stop
 

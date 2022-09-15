@@ -13,11 +13,8 @@ class SaleFactory extends Factory
     public function definition()
     {
         return [
-			'user_id' => $this->faker->name,
-			'sorteo_id' => $this->faker->name,
-			'phone' => $this->faker->name,
-			'total' => $this->faker->name,
-			'status' => $this->faker->name,
+			'product' => $this->faker->name,
+			'cant' => $this->faker->name,
         ];
     }
 }

@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 // ruta vista que se carga por defecto
-Route::view('/', 'auth.login')->name('login');
+//Route::view('/', 'auth.login')->name('login');
+Route::view('/', 'home')->name('home');
 
 // control routes
 Auth::routes([
@@ -12,19 +13,15 @@ Auth::routes([
     'verify' => false, // Email Verification Routes...
 ]);
 
-Route::view('/home', 'home')->name('home');
+//Route::view('/home', 'home')->name('home');
 
-Route::view('companies', 'livewire.companies.index')->middleware('auth');
 
-Route::view('sales', 'livewire.sales.index')->middleware('auth');
+Route::view('products', 'livewire.products.index');
 
-Route::view('users', 'livewire.users.index')->middleware('auth');
+Route::view('sales', 'livewire.sales.index');
 
-Route::view('boxes', 'livewire.boxs.index')->middleware('auth');
 
 
 
 
 	
-	
-//Route Hooks - Do not delete//
