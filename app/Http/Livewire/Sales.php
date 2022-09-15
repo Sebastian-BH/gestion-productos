@@ -73,8 +73,13 @@ class Sales extends Component
     public function maxStock()
     {
         $this->maxstock = Product::orderBy('stock', 'desc')->first();
-        if($this->maxstock->stock <= 0){
-            session()->flash('meseg', 'Todos los productos estan agotados');
+        
+        if( $this->maxstock != null){
+            if($this->maxstock->stock <= 0){
+                session()->flash('meseg', 'Todos los productos estan agotados');
+            }
+        }else{
+            session()->flash('meseg', 'No hay productos registrados');
         }
     }
 
