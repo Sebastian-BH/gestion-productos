@@ -18,13 +18,7 @@ php artisan serve
 
 copias la direccion y la pegas en tu navegador y listo
 
-sentencias sql
 
-sentencia para conocer cuál es el producto que más stock tiene.
-SELECT * from products WHERE products.stock = (SELECT MAX(products.stock) FROM products)
-
-sentencia para conocer cuál es el producto más vendido.
-SELECT SUM(cant), products.name FROM `sales` JOIN products ON sales.product = products.id GROUP BY product ORDER BY product limit 1
 
 ```
 
