@@ -27,7 +27,7 @@
 					@if(!is_null($producto))
 					<div class="row m-2">
 						<div class="col-sm-4">
-							<h3>Informacón del producto</h3>								
+							<h3>Información del producto</h3>								
 							<p>NOMBRE DEL PRODUCTO: {{$producto[0]->name}}</p>
 							<p>REFERENCIA: {{$producto[0]->reference}}</p>
 							<p>PRECIO: ${{$producto[0]->price}}</p>

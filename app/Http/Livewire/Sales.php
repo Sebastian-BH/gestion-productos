@@ -55,7 +55,7 @@ class Sales extends Component
         }else{
             $this->resetInput();
             $this->emit('closeModal');
-            session()->flash('msg', 'Lo sentimos cantidad insuficiente.');
+            session()->flash('msg', 'Lo sentimos, cantidad insuficiente.');
        }
         
     }
